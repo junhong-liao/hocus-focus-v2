@@ -24,3 +24,18 @@ document.getElementById("toggleButton").addEventListener("click", function() {
         });
     });
 });
+
+const contentWidthSlider = document.getElementById("contentWidth");
+const contentWidthValue = document.getElementById("contentWidthValue");
+
+// Load the saved content width value and set the slider's position
+chrome.storage.sync.get("contentWidth", function(data) {
+    contentWidthSlider.value = data.contentWidth || 50; // default to 50 if not set
+    contentWidthValue.textContent = contentWidthSlider.value;
+});
+
+// Update the displayed value and save to storage when slider is moved
+contentWidthSlider.addEventListener("input", function() {
+    contentWidthValue.textContent = contentWidthSlider.value;
+    chrome.storage.sync.set({"contentWidth": parseInt(contentWidthSlider.value)});
+});

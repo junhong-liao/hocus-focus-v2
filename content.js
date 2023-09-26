@@ -54,5 +54,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
+// Adjust content width based on user preference
+chrome.storage.sync.get("contentWidth", function(data) {
+    const widthPercentage = data.contentWidth || 50; // default to 50 if not set
+    document.body.style.maxWidth = `${widthPercentage}vw`;
+    document.body.style.margin = "0 auto";
+});
+
 // Apply bolding immediately upon script injection
 applyBolding();

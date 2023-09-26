@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Toggle Partial Bold</title>
-    <style>
-        body {
-            width: 200px;
-        }
-        button {
-            width: 100%;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hocus Focus</title>
 </head>
 <body>
-    <button id="toggleButton">Toggle Bold</button>
+    <button id="toggleButton">Hocus Focus</button>
+    <br><br>
+    <label for="contentWidth">Content Width (%):</label>
+    <input type="range" id="contentWidth" min="10" max="100" step="1">
+    <span id="contentWidthValue">50</span>%
     <script src="popup.js"></script>
 </body>
 </html>
