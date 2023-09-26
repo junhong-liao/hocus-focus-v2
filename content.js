@@ -43,23 +43,29 @@ function revertBolding() {
     }
 }
 
+function adjustContentWidth(widthPercentage) {
+    document.body.style.maxWidth = `${widthPercentage}vw`;
+    document.body.style.margin = "0 auto";
+}
+
+// Load the isBoldEnabled flag and apply/revert bolding accordingly
+chrome.storage.sync.get("isBoldEnabled", function(data) {
+    if (data.isBoldEnabled) {
+        applyBolding();
+    } else {
+        revertBolding();
+    }
+});
+
 // Listen for messages from popup.js
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("Received message:", request.action);
 
     if (request.action === 'revertBold') {
         revertBolding();
+    } else if (request.action === 'setContentWidth') {
+        adjustContentWidth(request.width);
     } else {
         applyBolding();
     }
 });
-
-// Adjust content width based on user preference
-chrome.storage.sync.get("contentWidth", function(data) {
-    const widthPercentage = data.contentWidth || 50; // default to 50 if not set
-    document.body.style.maxWidth = `${widthPercentage}vw`;
-    document.body.style.margin = "0 auto";
-});
-
-// Apply bolding immediately upon script injection
-applyBolding();
