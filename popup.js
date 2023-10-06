@@ -31,7 +31,7 @@ const contentWidthValue = document.getElementById("contentWidthValue");
 
 // Load the saved content width value and set the slider's position
 chrome.storage.sync.get("contentWidth", function(data) {
-    contentWidthSlider.value = data.contentWidth || 50; // default to 50 if not set
+    contentWidthSlider.value = data.contentWidth || 100; // defaults at 100%
     contentWidthValue.textContent = contentWidthSlider.value;
 });
 
